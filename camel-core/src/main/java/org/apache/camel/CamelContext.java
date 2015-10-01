@@ -500,6 +500,7 @@ public interface CamelContext extends SuspendableService, RuntimeConfiguration {
 
     /**
      * Gets the REST configuration for the given component
+     *
      * @param component the component name to get the configuration
      * @param defaultIfNotFound determine if the default configuration is returned if there isn't a 
      *        specific configuration for the given component  
@@ -508,8 +509,7 @@ public interface CamelContext extends SuspendableService, RuntimeConfiguration {
     RestConfiguration getRestConfiguration(String component, boolean defaultIfNotFound);
     
     /**
-     * Gets all the RestConfigurations 
-     * @return
+     * Gets all the RestConfiguration's
      */
     Collection<RestConfiguration> getRestConfigurations();
 
@@ -1557,6 +1557,15 @@ public interface CamelContext extends SuspendableService, RuntimeConfiguration {
      * @return the json or <tt>null</tt> if the component was not found
      */
     String explainComponentJson(String componentName, boolean includeAllOptions);
+
+    /**
+     * Returns a JSON schema representation of the component parameters (not endpoint parameters) for the given component by its id.
+     *
+     * @param dataFormat the data format instance.
+     * @param includeAllOptions whether to include non configured options also (eg default options)
+     * @return the json
+     */
+    String explainDataFormatJson(String dataFormatName, DataFormat dataFormat, boolean includeAllOptions);
 
     /**
      * Returns a JSON schema representation of the endpoint parameters for the given endpoint uri.

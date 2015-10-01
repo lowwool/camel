@@ -109,6 +109,7 @@
         <include>org.apache.camel:camel-jclouds</include>
         <include>org.apache.camel:camel-jdbc</include>
         <include>org.apache.camel:camel-jetty-common</include>
+        <include>org.apache.camel:camel-jetty</include>
         <include>org.apache.camel:camel-jetty8</include>
         <include>org.apache.camel:camel-jetty9</include>
         <include>org.apache.camel:camel-jgroups</include>
@@ -117,6 +118,7 @@
         <include>org.apache.camel:camel-jira</include>
         <include>org.apache.camel:camel-jms</include>
         <include>org.apache.camel:camel-jmx</include>
+        <include>org.apache.camel:camel-jolt</include>
         <include>org.apache.camel:camel-josql</include>
         <include>org.apache.camel:camel-jpa</include>
         <include>org.apache.camel:camel-jsch</include>
@@ -204,6 +206,7 @@
         <include>org.apache.camel:camel-stringtemplate</include>
         <include>org.apache.camel:camel-syslog</include>
         <include>org.apache.camel:camel-swagger</include>
+        <include>org.apache.camel:camel-swagger-java</include> 
         <include>org.apache.camel:camel-tagsoup</include>
         <include>org.apache.camel:camel-test</include>
         <include>org.apache.camel:camel-test-blueprint</include>

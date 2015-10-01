@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.apache.camel.Component;
 import org.apache.camel.Consumer;
+import org.apache.camel.ExchangePattern;
 import org.apache.camel.NoSuchBeanException;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
@@ -62,6 +63,7 @@ public class RestEndpoint extends DefaultEndpoint {
 
     public RestEndpoint(String endpointUri, RestComponent component) {
         super(endpointUri, component);
+        setExchangePattern(ExchangePattern.InOut);
     }
 
     @Override
@@ -245,9 +247,6 @@ public class RestEndpoint extends DefaultEndpoint {
         }
 
         if (factory != null) {
-            Consumer consumer = factory.createConsumer(getCamelContext(), processor, getMethod(), getPath(), getUriTemplate(), getConsumes(), getProduces(), getParameters());
-            configureConsumer(consumer);
-
             // if no explicit port/host configured, then use port from rest configuration
             String scheme = "http";
             String host = "";
@@ -273,7 +272,6 @@ public class RestEndpoint extends DefaultEndpoint {
                     host = HostUtils.getLocalIp();
                 }
             }
-
 
             // calculate the url to the rest service
             String path = getPath();
@@ -304,6 +302,10 @@ public class RestEndpoint extends DefaultEndpoint {
                     url = url + "/" + uriTemplate;
                 }
             }
+
+            Consumer consumer = factory.createConsumer(getCamelContext(), processor, getMethod(), getPath(),
+                    getUriTemplate(), getConsumes(), getProduces(), config, getParameters());
+            configureConsumer(consumer);
 
             // add to rest registry so we can keep track of them, we will remove from the registry when the consumer is removed
             // the rest registry will automatic keep track when the consumer is removed,

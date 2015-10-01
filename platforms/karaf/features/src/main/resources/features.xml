@@ -184,6 +184,7 @@
   <feature name='camel-barcode' version='${project.version}' resolver='(obr)' start-level='50'>
     <feature version='${project.version}'>camel-core</feature>
     <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.zxing/${zxing-bundle-version}</bundle>
+    <bundle dependency='true'>wrap:mvn:com.beust/jcommander/${jcommander-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-barcode/${project.version}</bundle>
   </feature>
   <feature name='camel-bindy' version='${project.version}' resolver='(obr)' start-level='50'>
@@ -269,6 +270,11 @@
     <feature version='${cxf-version-range}'>cxf-specs</feature>
     <bundle dependency='true'>mvn:org.apache.chemistry.opencmis/chemistry-opencmis-osgi-client/${cmis-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-cmis/${project.version}</bundle>
+  </feature>
+  <feature name='camel-coap' version='${project.version}' resolver='(obr)' start-level='50'>
+      <feature version='${project.version}'>camel-core</feature>
+      <bundle>mvn:org.eclipse.californium/californium-osgi/${californium-version}</bundle>
+      <bundle>mvn:org.apache.camel/camel-coap/${project.version}</bundle>
   </feature>
   <feature name='camel-cometd' version='${project.version}' resolver='(obr)' start-level='50'>
     <feature>jetty</feature>
@@ -371,6 +377,8 @@
     <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-core/${jackson2-version}</bundle>
     <bundle dependency="true">wrap:mvn:javax.servlet/servlet-api/2.5</bundle>
     <bundle dependency='true'>wrap:mvn:com.dropbox.core/dropbox-core-sdk/${dropbox-version}</bundle>
+    <bundle dependency='true'>wrap:mvn:com.squareup.okhttp/okhttp/${squareup-okhttp-version}</bundle>
+    <bundle dependency='true'>wrap:mvn:com.squareup.okio/okio/${squareup-okio-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-dropbox/${project.version}</bundle>
   </feature>
   <feature name='camel-elasticsearch' version='${project.version}' resolver='(obr)' start-level='50'>
@@ -474,10 +482,19 @@
     <bundle dependency='true'>wrap:mvn:com.google.code.geocoder-java/geocoder-java/${geocoder-java-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-geocoder/${project.version}</bundle>
   </feature>
+  <feature name='camel-git' version='${project.version}' resolver='(obr)' start-level='50'>
+    <feature version='${project.version}'>camel-core</feature>
+    <bundle dependency='true'>mvn:org.eclipse.jgit/org.eclipse.jgit/${jgit-version}</bundle>
+    <bundle dependency='true'>mvn:com.googlecode.javaewah/JavaEWAH/0.7.9</bundle>
+    <bundle dependency="true">wrap:mvn:com.jcraft/jsch/${jsch-version}$Bundle-SymbolicName=com.jcraft.jsch&amp;Bundle-Version=${jsch-version}</bundle>
+    <bundle dependency='true'>mvn:org.apache.httpcomponents/httpcore-osgi/${httpcore4-version}</bundle>
+    <bundle dependency='true'>mvn:org.apache.httpcomponents/httpclient-osgi/${httpclient4-version}</bundle>
+    <bundle>mvn:org.apache.camel/camel-git/${project.version}</bundle>
+  </feature>
   <feature name='camel-github' version='${project.version}' resolver='(obr)' start-level='50'>
     <feature version='${project.version}'>camel-core</feature>
-    <!--the lastest gson version of github core supports is 2.2 -->
-    <bundle dependency='true'>mvn:com.google.code.gson/gson/2.2</bundle>
+    <!--the lastest gson version of github core supports is 2.2.2 -->
+    <bundle dependency='true'>mvn:com.google.code.gson/gson/2.2.2</bundle>
     <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.egit.github.core/${egit-github-core-bundle-version}</bundle>
     <bundle dependency='true'>mvn:commons-codec/commons-codec/${commons-codec-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-github/${project.version}</bundle>
@@ -820,6 +837,7 @@
     <bundle>mvn:org.apache.camel/camel-jdbc/${project.version}</bundle>
   </feature>
   <feature name='camel-jetty' version='${project.version}' resolver='(obr)' start-level='50'>
+    <details>camel-jetty intend to work with jetty8, so this feature only works in the karaf container which support jetty8, e.g. karaf 2.x/3.x</details>
     <feature>jetty</feature>
     <feature version='${project.version}'>camel-core</feature>
     <bundle>mvn:org.apache.camel/camel-http-common/${project.version}</bundle>
@@ -1198,7 +1216,7 @@
     <bundle>mvn:org.apache.camel/camel-quartz/${project.version}</bundle>
   </feature>
   <feature name='camel-quartz2' version='${project.version}' resolver='(obr)' start-level='50'>
-    <bundle dependency='true'>wrap:mvn:c3p0/c3p0/${c3p0-version}</bundle>
+    <bundle dependency='true'>wrap:mvn:com.mchange/c3p0/${c3p0-version}</bundle>
     <bundle dependency='true'>mvn:org.quartz-scheduler/quartz/${quartz2-version}</bundle>
     <feature version='${project.version}'>camel-core</feature>
     <bundle>mvn:org.apache.camel/camel-quartz2/${project.version}</bundle>
@@ -1237,10 +1255,6 @@
     <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jdom/${jdom-bundle-version}</bundle>
     <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.rome/${rome-bundle-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-rss/${project.version}</bundle>
-  </feature>
-  <feature name='camel-ruby' version='${project.version}' start-level='50'>
-    <feature version='${project.version}'>camel-script</feature>
-    <bundle dependency='true'>mvn:org.jruby/jruby-complete/${jruby-version}</bundle>
   </feature>
   <feature name='camel-rx' version='${project.version}' start-level='50'>
     <details>The camel-rx feature can only run on a SUN JVM. You need to add the package sun.misc to the java platform packages in the etc/jre.properties file.</details>
@@ -1295,27 +1309,28 @@
     <bundle>mvn:org.apache.camel/camel-scr/${project.version}</bundle>
   </feature>
    <feature name='camel-script-jruby' version='${project.version}' resolver='(obr)' start-level='50'>
+    <feature version='${project.version}'>camel-script</feature>
     <bundle>mvn:com.google.code.scriptengines/scriptengines-jruby/${scriptengines-version}</bundle>
     <bundle dependency='true'>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.scripting-api-1.0/${servicemix-specs-version}</bundle>
     <bundle dependency='true'>mvn:org.jruby/jruby-complete/${jruby-version}</bundle>
   </feature>
   <feature name='camel-script-javascript' version='${project.version}' resolver='(obr)' start-level='50'>
+    <feature version='${project.version}'>camel-script</feature>
     <bundle>mvn:com.google.code.scriptengines/scriptengines-javascript/${scriptengines-version}</bundle>
     <bundle dependency='true'>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.scripting-api-1.0/${servicemix-specs-version}</bundle>
-    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.rhino/${rhino-bundle-version}</bundle>
+    <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.rhino/${rhino-bundle-version}</bundle>
   </feature>
   <feature name='camel-script-groovy' version='${project.version}' resolver='(obr)' start-level='50'>
+    <feature version='${project.version}'>camel-script</feature>
     <bundle>mvn:com.google.code.scriptengines/scriptengines-groovy/${scriptengines-version}</bundle>
     <bundle dependency='true'>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.scripting-api-1.0/${servicemix-specs-version}</bundle>
-    <bundle>mvn:org.codehaus.groovy/groovy-all/${groovy-version}</bundle>
+    <bundle dependency='true'>mvn:org.codehaus.groovy/groovy-all/${groovy-version}</bundle>
   </feature>
   <feature name='camel-script' version='${project.version}' resolver='(obr)' start-level='50'>
     <feature version='${project.version}'>camel-core</feature>
     <bundle dependency='true'>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.scripting-api-1.0/${servicemix-specs-version}</bundle>
     <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/${antlr-bundle-version}</bundle>
     <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.rhino/${rhino-bundle-version}</bundle>
-    <bundle>mvn:org.codehaus.groovy/groovy-all/${groovy-version}</bundle>
-    <bundle dependency='true'>mvn:org.jruby/jruby-complete/${jruby-version}</bundle>
     <bundle>mvn:org.apache.camel/camel-script/${project.version}</bundle>
   </feature>
   <feature name='camel-servlet' version='${project.version}' resolver='(obr)' start-level='50'>
@@ -1513,7 +1528,7 @@
     <bundle>mvn:org.apache.camel/camel-stringtemplate/${project.version}</bundle>
   </feature>
   <feature name='camel-swagger' version='${project.version}' resolver='(obr)' start-level='50'>
-    <details> camel-swagger need to access the http OSGi services </details>
+    <details>camel-swagger is deprecated, use camel-swagger-java instead</details>
     <feature>http</feature>
     <feature version='${project.version}'>camel-core</feature>
     <!-- must use Scala 2.10 -->
@@ -1547,6 +1562,11 @@
     <feature version='${project.version}'>camel-core</feature>
     <bundle>mvn:org.apache.camel/camel-tagsoup/${project.version}</bundle>
   </feature>
+  <feature name='camel-tarfile' version='${project.version}' resolver='(obr)' start-level='50'>
+    <feature version='${project.version}'>camel-core</feature>
+    <bundle>mvn:org.apache.camel/camel-tarfile/${project.version}</bundle>
+    <bundle dependency='true'>mvn:org.apache.commons/commons-compress/${commons-compress-version}</bundle>
+  </feature>
   <feature name='camel-test' version='${project.version}' resolver='(obr)' start-level='50'>
     <feature version='${project.version}'>camel-core</feature>
     <feature version='${project.version}'>camel-spring</feature>
@@ -1564,6 +1584,12 @@
     <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.twitter4j/${twitter4j-bundle-version}</bundle>
     <feature version='${project.version}'>camel-core</feature>
     <bundle>mvn:org.apache.camel/camel-twitter/${project.version}</bundle>
+  </feature>
+  <feature name='camel-undertow' version='${project.version}' resolver='(obr)' start-level='50'>
+    <feature version='${project.version}'>camel-core</feature>
+    <bundle dependency='true'>wrap:mvn:io.undertow/undertow-core/${undertow-version}</bundle>
+    <bundle dependency='true'>wrap:mvn:org.jboss.xnio/xnio-api/${jboss-xnio-version}</bundle>
+    <bundle>mvn:org.apache.camel/camel-undertow/${project.version}</bundle>
   </feature>
   <feature name='camel-univocity-parsers' version='${project.version}' resolver='(obr)' start-level='50'>
     <bundle dependency='true'>mvn:com.univocity/univocity-parsers/${univocity-parsers-version}</bundle>
